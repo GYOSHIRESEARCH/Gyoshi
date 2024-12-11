@@ -17,6 +17,8 @@ Gyoshi is an experimental AI project that simulates perpetual conversations betw
 - [Usage](#usage)
 - [Future Enhancements](#future-enhancements)
 - [License](#license)
+
+
 ![FvN4HR-XwAAd6WI](https://github.com/user-attachments/assets/ca9133cc-6551-4187-bf9e-4cf319800656)
 ---
 
