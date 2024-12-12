@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Simulation</title>
+    <style>
+        body {
+            font-family: 'Inconsolata', monospace;
+            margin: 20px;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+        pre {
+            background: #2e2e2e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            overflow: auto;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1c1c1c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .keyword { color: #569CD6; }
+        .function { color: #DCDCAA; }
+        .string { color: #CE9178; }
+        .comment { color: #6A9955; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Room Simulation Example</h1>
+    <p>This is an example of how the <strong>Room Simulation</strong> Python script works:</p>
+
+    <pre id="codeSnippet">
+<span class="keyword">class</span> <span class="function">RoomSimulation</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, room_name):
+        self.room_name = room_name
+        self.temperature = <span class="string">22</span>
+        self.lighting = <span class="string">"bright"</span>
+
+    <span class="keyword">def</span> <span class="function">update_temperature</span>(self, delta):
+        self.temperature += delta
+        self.temperature = <span class="keyword">max</span>(<span class="string">10</span>, <span class="keyword">min</span>(self.temperature, <span class="string">30</span>))
+
+    <span class="keyword">def</span> <span class="function">toggle_lighting</span>(self):
+        self.lighting = <span class="string">"dim"</span> <span class="keyword">if</span> self.lighting == <span class="string">"bright"</span> <span class="keyword">else</span> <span class="string">"bright"</span>
+
+    <span class="keyword">def</span> <span class="function">get_state</span>(self):
+        <span class="comment"># Returns the current state of the room</span>
+        <span class="keyword">return</span> {
+            <span class="string">"room_name"</span>: self.room_name,
+            <span class="string">"temperature"</span>: self.temperature,
+            <span class="string">"lighting"</span>: self.lighting
+        }
+
+room = <span class="function">RoomSimulation</span>(<span class="string">"Gyoshi's Living Room"</span>)
+room.<span class="function">update_temperature</span>(<span class="string">3</span>)
+room.<span class="function">toggle_lighting</span>()
+<span class="function">print</span>(room.<span class="function">get_state</span>())
+    </pre>
+</div>
+</body>
+</html>
