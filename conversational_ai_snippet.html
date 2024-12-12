@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversational AI</title>
+    <style>
+        body {
+            font-family: 'Inconsolata', monospace;
+            margin: 20px;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+        pre {
+            background: #2e2e2e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            overflow: auto;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1c1c1c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .keyword { color: #569CD6; }
+        .function { color: #DCDCAA; }
+        .string { color: #CE9178; }
+        .comment { color: #6A9955; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Conversational AI for Entities</h1>
+    <p>This example demonstrates the architecture and logic for conversational AI between distinct entities, leveraging advanced AI tools:</p>
+
+    <pre id="codeSnippet">
+<span class="comment"># Import necessary libraries</span>
+<span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForCausalLM, AutoTokenizer
+
+<span class="comment"># Load pre-trained GPT-based model</span>
+tokenizer = AutoTokenizer.<span class="function">from_pretrained</span>(<span class="string">"gpt2"</span>)
+model = AutoModelForCausalLM.<span class="function">from_pretrained</span>(<span class="string">"gpt2"</span>)
+
+<span class="comment"># Initialize personalities</span>
+pepe_personality = <span class="string">"A witty and sarcastic character."</span>
+jack_personality = <span class="string">"A logical and methodical thinker."</span>
+
+<span class="comment"># Dialogue Manager using context</span>
+<span class="keyword">def</span> <span class="function">generate_response</span>(input_text, personality):
+    input_ids = tokenizer.<span class="function">encode</span>(personality + <span class="string">": "</span> + input_text, <span class="keyword">return_tensors</span>=<span class="string">"pt"</span>)
+    output = model.<span class="function">generate</span>(input_ids, max_length=<span class="string">50</span>, pad_token_id=tokenizer.eos_token_id)
+    <span class="keyword">return</span> tokenizer.<span class="function">decode</span>(output[<span class="string">0</span>], skip_special_tokens=<span class="string">True</span>)
+
+<span class="comment"># Sample interaction</span>
+user_input = <span class="string">"What is the meaning of life?"</span>
+pepe_response = <span class="function">generate_response</span>(user_input, pepe_personality)
+jack_response = <span class="function">generate_response</span>(user_input, jack_personality)
+
+<span class="function">print</span>(<span class="string">"Pepe: "</span> + pepe_response)
+<span class="function">print</span>(<span class="string">"Jack: "</span> + jack_response)
+    </
