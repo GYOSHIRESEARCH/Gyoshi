@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment Awareness</title>
+    <style>
+        body {
+            font-family: 'Inconsolata', monospace;
+            margin: 20px;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+        pre {
+            background: #2e2e2e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            overflow: auto;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1c1c1c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        .keyword { color: #569CD6; }
+        .function { color: #DCDCAA; }
+        .string { color: #CE9178; }
+        .comment { color: #6A9955; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Environment Awareness</h1>
+    <p>This example showcases how Pepe and Jack can sense and respond to environmental changes:</p>
+
+    <pre id="codeSnippet">
+<span class="comment"># Sensor Emulation</span>
+<span class="keyword">import</span> random
+
+<span class="keyword">class</span> <span class="function">Environment</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        self.temperature = <span class="string">22</span>  <span class="comment"># Initial room temperature</span>
+        self.objects = {
+            <span class="string">"lamp"</span>: <span class="keyword">False</span>,  <span class="comment"># Off by default</span>
+            <span class="string">"door"</span>: <span class="string">"closed"</span>
+        }
+
+    <span class="keyword">def</span> <span class="function">update_temperature</span>(self):
+        self.temperature += random.<span class="function">randint</span>(<span class="string">-1</span>, <span class="string">1</span>)
+    
+    <span class="keyword">def</span> <span class="function">toggle_object</span>(self, object_name):
+        <span class="keyword">if</span> object_name <span class="keyword">in</span> self.objects:
+            <span class="keyword">if</span> object_name == <span class="string">"lamp"</span>:
+                self.objects[object_name] = <span class="keyword">not</span> self.objects[object_name]
+            <span class="keyword">elif</span> object_name == <span class="string">"door"</span>:
+                self.objects[object_name] = <span class="string">"open"</span> <span class="keyword">if</span> self.objects[object_name] == <span class="string">"closed"</span> <span class="keyword">else</span> <span class="string">"closed"</span>
+
+    <span class="keyword">def</span> <span class="function">get_state</span>(self):
+        <span class="comment"># Returns the current state of the environment</span>
+        <span class="keyword">return</span> {
+            <span class="string">"temperature"</span>: self.temperature,
+            <span class="string">"objects"</span>: self.objects
+        }
+
+<span class="comment"># Shared Context API</span>
+<span class="keyword">def</span> <span class="function">shared_context</span>(entity_name, environment):
+    <span class="comment"># Entities use shared context to access room state</span>
+    <span class="keyword">return</span> {
+        <span class="string">"entity"</span>: entity_name,
+        <span class="string">"environment_state"</span>: environment.<span class="function">get_state</span>()
+    }
+
+<span class="comment"># Raycasting for Object Interactions (concept)</span>
+<span class="comment"># Simulated with distance checks</span>
+<span class="keyword">def</span> <span class="function">raycast</span>(origin, target):
+    <span class="keyword">if</span> origin == target:
+        <span class="keyword">return</span> <span class="string">"Interaction Success!"</span>
+    <span class="keyword">return</span> <span class="string">"No interaction detected."</span>
+
+<span class="comment"># Example Usage</span>
+room = <span class="function">Environment</span>()
+room.<span class="function">update_temperature</span>()
+room.<span class="function">toggle_object</span>(<span class="string">"lamp"</span>)
+
+entity_state = <span class="function">shared_context</span>(<span class="string">"Pepe"</span>, room)
+<span class="function">print</span>(entity_state)
+
+interaction_result = <span class="function">raycast</span>(<span class="string">"lamp"</span>, <span class="string">"lamp"</span>)
+<span class="function">print</span>(interaction_result)
+    </pre>
+
+    <button onclick="simulateEnvironment()">Run Simulation</button>
+
+    <h2>Simulation Output</h2>
+    <pre id="output"></pre>
+</div>
+
+<script>
+    function simulateEnvironment() {
+        const environmentState = "Environment State:\\nTemperature: 23°C\\nObjects: { lamp: ON, door: closed }";
+        const interaction = "Interaction Result:\\nInteraction Success!";
+        
+        const output = document.getElementById("output");
+        output.textContent = `${environmentState}\\n\\n${interaction}`;
+    }
+</script>
+</body>
+</html>
